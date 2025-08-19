@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Surprise </title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .gate {
+      width: 200px;
+      height: 300px;
+      background: #8b0000;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      perspective: 1000px;
+    }
+
+    .door {
+      width: 100%;
+      height: 100%;
+      background: #a52a2a;
+      border-radius: 10px;
+      transform-origin: left;
+      transition: transform 1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .open {
+      transform: rotateY(-100deg);
+    }
+
+    .message {
+      display: none;
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .message img {
+      margin-top: 20px;
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8);}
+      to { opacity: 1; transform: scale(1);}
+    }
+  </style>
+</head>
+<body>
+  <div id="gameArea">
+    <div class="gate" onclick="openGate(1)">
+      <div class="door">Gate kholo 🚪</div>
+    </div>
+  </div>
+
+  <div class="message" id="finalMsg">
+    💖 Finally... I just want to ask... <br><br>
+    Light aa gyi kya Naigaon me? 😄<br>  
+    <br>
+  </div>
+
+  <script>
+    let gateCount = 0;
+
+    function openGate(num) {
+      const door = document.querySelector('.door');
+      door.classList.add('open');
+
+      setTimeout(() => {
+        document.getElementById("gameArea").innerHTML = "";
+        gateCount++;
+
+        if (gateCount === 1) {
+          document.getElementById("gameArea").innerHTML = `
+            <div class="gate" onclick="openGate(2)">
+              <div class="door">Thoda sabar kro 😅</div>
+            </div>`;
+        } 
+        else if (gateCount === 2) {
+          document.getElementById("gameArea").innerHTML = `
+            <div class="gate" onclick="openGate(3)">
+              <div class="door">Bas thoda aur... 😉</div>
+            </div>`;
+        } 
+        else {
+          document.getElementById("gameArea").style.display = "none";
+          document.getElementById("finalMsg").style.display = "block";
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
